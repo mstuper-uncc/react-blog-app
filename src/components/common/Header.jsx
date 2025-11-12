@@ -4,7 +4,7 @@ import logo from "./myblog.png";
 import { useTheme } from '../common/ThemeContext';
 
 function Header() {
-    const { theme, toggleTheme } = useTheme();
+    const { toggleTheme } = useTheme();
     return (
         <header class='header'>
         <div class='navbar'>

@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { data, useParams} from 'react-router';
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router';
 
 function Comments() {
     const { id } = useParams();
