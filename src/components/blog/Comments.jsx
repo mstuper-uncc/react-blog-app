@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router';
+import { useParams} from 'react-router';
+import { useAuth } from "../login/Auth";
 
 function Comments() {
     const { id } = useParams();
+    const { user } = useAuth();
 
     const [ commentList, setCommentList ] = useState([]);
     const [ name, setName ] = useState('');
@@ -27,23 +29,15 @@ function Comments() {
 [id]);
 
     const commentSubmit = () => {
-        fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`, {
-            method: 'POST',
-            headers: { 'Content-type': 'application/json; charset=UTF-8',
-            },
-            body: JSON.stringify({
-                name: name,
-                body: comment,
-                postId: id,
-            }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                setCommentList(prev => [...prev, data]);
-                setName('');
-                setComment('');
-            })
-            .catch(error => console.error('Error posting comment:', error));
+            const newComment = {
+            id: commentList.length + 1,
+            postId: id,
+            name: user.username,
+            body: comment
+        };
+
+        setCommentList(prev => [...prev, newComment]);
+        setComment('');
 
     };
 
@@ -55,9 +49,12 @@ function Comments() {
         <div class="comments">
             <h2>Comments</h2>
             <div>
-                <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
-                <textarea placeholder="Comment" value={comment} onChange={e => setComment(e.target.value)} />
-                <button onClick={commentSubmit}>Submit Comment</button>
+                {user ? (
+                        <><p>Commenting as: {user.username}</p><textarea placeholder="Comment" value={comment} onChange={e => setComment(e.target.value)} /><button onClick={commentSubmit}>Submit Comment</button></>
+                    
+                ) : (
+                    <p>Please login to comment</p>
+                )}
             </div>
             {commentList.length === 0 ? (
                 <p>No comments yet. Be the first to comment.</p>
