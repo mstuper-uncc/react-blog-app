@@ -7,7 +7,6 @@ function Comments() {
     const { user } = useAuth();
 
     const [ commentList, setCommentList ] = useState([]);
-    const [ name, setName ] = useState('');
     const [ comment, setComment ] = useState('');
 
     const focusOnCommentBox = () => {

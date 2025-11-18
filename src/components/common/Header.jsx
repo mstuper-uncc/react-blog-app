@@ -5,7 +5,7 @@ import { useTheme } from '../common/ThemeContext';
 import { useAuth } from '../login/Auth';
 
 function Header() {
-    const { theme, toggleTheme } = useTheme();
+    const { toggleTheme } = useTheme();
     const { user, logout } = useAuth();
     return (
         <header class='header'>
