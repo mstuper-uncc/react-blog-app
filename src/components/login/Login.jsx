@@ -10,7 +10,7 @@ function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = e => {
+  const onSubmit = e => {
     e.preventDefault();
     const success = login(username, password);
     if(success) {
@@ -23,8 +23,8 @@ function Login() {
   return (
     <div class="login">
       <h1>Login</h1>
-
-      <form onSubmit={handleSubmit}>
+    
+      <form onSubmit={onSubmit}>
         <input 
           placeholder="Username"
           value={username}
