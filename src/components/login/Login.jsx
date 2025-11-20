@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  
 
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -15,8 +15,6 @@ function Login() {
     const success = login(username, password);
     if(success) {
       navigate("/posts");
-    } else {
-      setError("Invalid Login");
     }
   };
 
@@ -40,7 +38,6 @@ function Login() {
           required
         />
 
-        {error && <p class="error">{error}</p>}
 
         <button type="submit">Login</button>
       </form>
